@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:todo/app/home/home_page.dart';
+import 'package:todo/app/login/login_page.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: RootPage(),
+      home: const RootPage(),
     );
   }
 }
@@ -40,17 +42,9 @@ class RootPage extends StatelessWidget {
         final user = snapshot.data;
 
         if (user == null) {
-          return const Scaffold(
-            body: Center(
-              child: Text('You are signed out!'),
-            ),
-          );
+          return const LoginPage();
         }
-        return Scaffold(
-          body: Center(
-            child: Text('You are signed in as ${user.email}'),
-          ),
-        );
+        return HomePage(user: user);
       },
     );
   }
