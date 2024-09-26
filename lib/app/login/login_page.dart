@@ -1,13 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({
     super.key,
   });
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -23,20 +29,20 @@ class LoginPage extends StatelessWidget {
               const MyCommunication(text: 'Hey, we missed you!'),
               const SizedBox(height: 100),
               MyTextField(
-                controller: emailController,
+                controller: widget.emailController,
                 label: 'Email',
                 isObscure: false,
               ),
               const SizedBox(height: 20),
               MyTextField(
-                controller: passwordController,
+                controller: widget.passwordController,
                 label: 'Password',
                 isObscure: true,
               ),
               const SizedBox(height: 40),
               MyButton(
-                emailController: emailController.text,
-                passwordController: passwordController.text,
+                emailController: widget.emailController.text,
+                passwordController: widget.passwordController.text,
                 text: 'Login',
               ),
               const SizedBox(height: 10),
