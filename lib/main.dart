@@ -42,7 +42,7 @@ class RootPage extends StatelessWidget {
         final user = snapshot.data;
 
         if (user == null) {
-          return const LoginPage();
+          return LoginPage();
         }
         return HomePage(user: user);
       },
