@@ -13,7 +13,22 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('You are signed in as ${user.email}'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('You are signed in as ${user.email}'),
+            const SizedBox(height: 20),
+            IconButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+              
+              icon: const Icon(Icons.logout),
+              color: Colors.black,
+              iconSize: 30,
+            ),
+          ],
+        ),
       ),
     );
   }
