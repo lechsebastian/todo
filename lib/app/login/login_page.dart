@@ -6,14 +6,43 @@ class LoginPage extends StatefulWidget {
     super.key,
   });
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  var isCreatingAccount = false;
+
+  void switchLogingMode() {
+    setState(() {
+      isCreatingAccount = !isCreatingAccount;
+    });
+  }
+
+  void login() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: widget.emailController.text,
+        password: widget.passwordController.text,
+      );
+    } catch (error) {
+      print('Error has been occured: $error');
+    }
+  }
+
+  void register() async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: widget.emailController.text,
+        password: widget.passwordController.text,
+      );
+    } catch (error) {
+      print('Error has been occured: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +55,11 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               const Icon(Icons.assignment, size: 180),
               const SizedBox(height: 20),
-              const MyCommunication(text: 'Hey, we missed you!'),
+              MyCommunication(
+                text: isCreatingAccount
+                    ? 'Hey, nice to see you here!'
+                    : 'Hey, we missed you!',
+              ),
               const SizedBox(height: 100),
               MyTextField(
                 controller: widget.emailController,
@@ -41,13 +74,17 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 40),
               MyButton(
-                emailController: widget.emailController.text,
-                passwordController: widget.passwordController.text,
-                text: 'Login',
+                text: isCreatingAccount ? 'Register' : 'Login',
+                onTap: isCreatingAccount ? register : login,
               ),
               const SizedBox(height: 10),
-              const MyTextAndButton(
-                  text: 'Not a member? ', textToTap: 'Register now'),
+              MyTextAndButton(
+                onTap: switchLogingMode,
+                text: isCreatingAccount
+                    ? 'Already have an account? '
+                    : 'Not a member? ',
+                textToTap: isCreatingAccount ? 'Log in' : 'Register now',
+              ),
             ],
           ),
         ),
@@ -59,10 +96,12 @@ class _LoginPageState extends State<LoginPage> {
 class MyTextAndButton extends StatelessWidget {
   const MyTextAndButton({
     super.key,
+    required this.onTap,
     required this.text,
     required this.textToTap,
   });
 
+  final VoidCallback onTap;
   final String text;
   final String textToTap;
 
@@ -76,7 +115,7 @@ class MyTextAndButton extends StatelessWidget {
           style: TextStyle(color: Colors.grey[700]),
         ),
         InkWell(
-            onTap: () {},
+            onTap: onTap,
             child: Text(
               textToTap,
               style: const TextStyle(fontWeight: FontWeight.bold),
@@ -96,8 +135,7 @@ class MyCommunication extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Hey, we missed you!',
-        style: TextStyle(color: Colors.grey[700], fontSize: 18));
+    return Text(text, style: TextStyle(color: Colors.grey[700], fontSize: 18));
   }
 }
 
@@ -105,27 +143,16 @@ class MyButton extends StatelessWidget {
   const MyButton({
     super.key,
     required this.text,
-    required this.emailController,
-    required this.passwordController,
+    required this.onTap,
   });
 
   final String text;
-  final String emailController;
-  final String passwordController;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () async {
-        try {
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
-            email: emailController,
-            password: passwordController,
-          );
-        } catch (error) {
-          print('Error has been occured: ${error}');
-        }
-      },
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
             color: Colors.black, borderRadius: BorderRadius.circular(4)),
@@ -162,6 +189,7 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       obscureText: isObscure,
       decoration: InputDecoration(
         border: const OutlineInputBorder(),
