@@ -1,5 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/app/widgets/my_button.dart';
+import 'package:todo/app/widgets/my_communication.dart';
+import 'package:todo/app/widgets/my_text_and_button.dart';
+import 'package:todo/app/widgets/my_textfield.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({
@@ -88,112 +92,6 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class MyTextAndButton extends StatelessWidget {
-  const MyTextAndButton({
-    super.key,
-    required this.onTap,
-    required this.text,
-    required this.textToTap,
-  });
-
-  final VoidCallback onTap;
-  final String text;
-  final String textToTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Text(
-          text,
-          style: TextStyle(color: Colors.grey[700]),
-        ),
-        InkWell(
-            onTap: onTap,
-            child: Text(
-              textToTap,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ))
-      ],
-    );
-  }
-}
-
-class MyCommunication extends StatelessWidget {
-  const MyCommunication({
-    super.key,
-    required this.text,
-  });
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(text, style: TextStyle(color: Colors.grey[700], fontSize: 18));
-  }
-}
-
-class MyButton extends StatelessWidget {
-  const MyButton({
-    super.key,
-    required this.text,
-    required this.onTap,
-  });
-
-  final String text;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.black, borderRadius: BorderRadius.circular(4)),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Center(
-            child: Text(
-              text,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class MyTextField extends StatelessWidget {
-  const MyTextField({
-    super.key,
-    required this.controller,
-    required this.label,
-    required this.isObscure,
-  });
-
-  final TextEditingController controller;
-  final String label;
-  final bool isObscure;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      obscureText: isObscure,
-      decoration: InputDecoration(
-        border: const OutlineInputBorder(),
-        label: Text(label),
       ),
     );
   }
