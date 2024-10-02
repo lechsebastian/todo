@@ -9,7 +9,10 @@ class TasksPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-      stream: FirebaseFirestore.instance.collection('tasks').snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('tasks')
+          .orderBy('priority')
+          .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return const Center(
@@ -34,8 +37,7 @@ class TasksPageContent extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 16, right: 24, top: 8, bottom: 8),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(8),
                     color: Colors.white,
                   ),
                   child: Row(
@@ -61,6 +63,7 @@ class TasksPageContent extends StatelessWidget {
                     ],
                   ),
                 ),
+                const SizedBox(height: 12),
               ],
             ],
           ),
