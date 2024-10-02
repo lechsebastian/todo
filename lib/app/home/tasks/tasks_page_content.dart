@@ -30,24 +30,36 @@ class TasksPageContent extends StatelessWidget {
             child: ListView(
               children: [
                 for (final document in documents) ...[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: document['done'],
-                            onChanged: (value) {},
-                          ),
-                          Text(
-                            document['name'],
-                          ),
-                        ],
-                      ),
-                      Text(
-                        document['priority'].toString(),
-                      ),
-                    ],
+                  Container(
+                    padding: const EdgeInsets.only(
+                        left: 16, right: 24, top: 8, bottom: 8),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(24),
+                      color: Colors.white,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: document['done'],
+                              activeColor: Colors.black,
+                              onChanged: (value) {},
+                            ),
+                            Text(
+                              document['name'],
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          document['priority'].toString(),
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ],

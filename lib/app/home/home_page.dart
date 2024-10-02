@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.grey.shade300,
         title: currentIndex == 0
             ? const Text(
                 'To do',
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> {
             : null,
         centerTitle: true,
       ),
+      backgroundColor: Colors.grey.shade300,
       body: Builder(builder: (context) {
         if (currentIndex == 0) {
           return const TasksPageContent();
