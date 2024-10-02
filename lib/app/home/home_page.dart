@@ -33,12 +33,24 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
       ),
       backgroundColor: Colors.grey.shade300,
-      body: Builder(builder: (context) {
-        if (currentIndex == 0) {
-          return const TasksPageContent();
-        }
-        return SettingsPageContent(email: widget.user.email!);
-      }),
+      body: Builder(
+        builder: (context) {
+          if (currentIndex == 0) {
+            return const TasksPageContent();
+          }
+          return SettingsPageContent(email: widget.user.email!);
+        },
+      ),
+      floatingActionButton: currentIndex == 0
+          ? FloatingActionButton(
+              backgroundColor: Colors.black,
+              onPressed: () {},
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+            )
+          : null,
       bottomNavigationBar: Container(
         color: Colors.black,
         child: Padding(
