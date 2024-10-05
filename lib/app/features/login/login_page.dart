@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:todo/app/widgets/my_button.dart';
-import 'package:todo/app/widgets/my_communication.dart';
-import 'package:todo/app/widgets/my_text_and_button.dart';
-import 'package:todo/app/widgets/my_textfield.dart';
+import 'package:todo/app/features/widgets/my_button.dart';
+import 'package:todo/app/features/widgets/my_communication.dart';
+import 'package:todo/app/features/widgets/my_text_and_button.dart';
+import 'package:todo/app/features/widgets/my_textfield.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({
