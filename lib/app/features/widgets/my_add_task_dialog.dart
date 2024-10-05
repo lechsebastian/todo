@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:todo/app/widgets/my_textfield.dart';
+import 'package:todo/app/features/widgets/my_textfield.dart';
 
 class MyAddTaskDialog extends StatefulWidget {
   const MyAddTaskDialog({super.key});

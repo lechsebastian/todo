@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/app/home/tasks/cubit/tasks_cubit.dart';
+import 'package:todo/app/features/home/tasks/cubit/tasks_cubit.dart';
 
 class TasksPageContent extends StatelessWidget {
   const TasksPageContent({
