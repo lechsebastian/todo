@@ -1,9 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/app/cubit/root_cubit.dart';
 import 'package:todo/app/features/widgets/my_button.dart';
 import 'package:todo/app/features/widgets/my_communication.dart';
 import 'package:todo/app/features/widgets/my_text_and_button.dart';
 import 'package:todo/app/features/widgets/my_textfield.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({
@@ -27,25 +28,17 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void login() async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: widget.emailController.text,
-        password: widget.passwordController.text,
-      );
-    } catch (error) {
-      print('Error has been occured: $error');
-    }
+    context.read<RootCubit>().signIn(
+          email: widget.emailController.text,
+          password: widget.passwordController.text,
+        );
   }
 
   void register() async {
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: widget.emailController.text,
-        password: widget.passwordController.text,
-      );
-    } catch (error) {
-      print('Error has been occured: $error');
-    }
+    context.read<RootCubit>().register(
+          email: widget.emailController.text,
+          password: widget.passwordController.text,
+        );
   }
 
   @override
