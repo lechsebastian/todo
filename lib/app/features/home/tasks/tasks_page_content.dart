@@ -54,7 +54,11 @@ class TasksPageContent extends StatelessWidget {
                             Checkbox(
                               value: document['done'],
                               activeColor: Colors.black,
-                              onChanged: (value) {},
+                              onChanged: (value) {
+                                context
+                                    .read<TasksCubit>()
+                                    .taskDone(documentID: document.id);
+                              },
                             ),
                             Text(
                               document['name'],
