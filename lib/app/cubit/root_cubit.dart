@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
@@ -50,7 +51,10 @@ class RootCubit extends Cubit<RootState> {
       );
   }
 
-  Future<void> signIn({required String email, required String password}) async {
+  Future<void> signIn({
+    required String email,
+    required String password,
+  }) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
@@ -61,8 +65,10 @@ class RootCubit extends Cubit<RootState> {
     }
   }
 
-  Future<void> register(
-      {required String email, required String password}) async {
+  Future<void> register({
+    required String email,
+    required String password,
+  }) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
@@ -75,6 +81,17 @@ class RootCubit extends Cubit<RootState> {
 
   Future<void> signOut() async {
     FirebaseAuth.instance.signOut();
+  }
+
+  Future<void> addTask({
+    required String taskName,
+    required taskPriority,
+  }) async {
+    FirebaseFirestore.instance.collection('tasks').add({
+      'name': taskName,
+      'priority': taskPriority,
+      'done': false,
+    });
   }
 
   @override
