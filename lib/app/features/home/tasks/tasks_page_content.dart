@@ -62,13 +62,26 @@ class TasksPageContent extends StatelessWidget {
                             ),
                             Text(
                               document['name'],
-                              style: const TextStyle(fontSize: 20),
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                decoration: document['done']
+                                    ? TextDecoration.lineThrough
+                                    : null,
+                              ),
                             ),
                           ],
                         ),
                         Text(
-                          document['priority'].toString(),
-                          style: const TextStyle(fontSize: 20),
+                          document['priority'] == 1 || document['priority'] == 2
+                              ? "!"
+                              : '',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color:
+                                document['priority'] == 1 ? Colors.red : null,
+                          ),
                         ),
                       ],
                     ),
