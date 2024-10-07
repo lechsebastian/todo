@@ -1,5 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/app/cubit/root_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsPageContent extends StatelessWidget {
   const SettingsPageContent({
@@ -19,7 +20,7 @@ class SettingsPageContent extends StatelessWidget {
           const SizedBox(height: 20),
           IconButton(
             onPressed: () {
-              FirebaseAuth.instance.signOut();
+              context.read<RootCubit>().signOut();
             },
             icon: const Icon(Icons.logout),
             color: Colors.black,

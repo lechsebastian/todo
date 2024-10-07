@@ -1,6 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
+import 'package:todo/app/cubit/root_cubit.dart';
 import 'package:todo/app/features/widgets/my_textfield.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyAddTaskDialog extends StatefulWidget {
   const MyAddTaskDialog({super.key});
@@ -22,11 +25,10 @@ class _MyAddTaskDialogState extends State<MyAddTaskDialog> {
           children: [
             TextButton(
               onPressed: () {
-                FirebaseFirestore.instance.collection('tasks').add({
-                  'name': taskController.text,
-                  'priority': _selectedPriority,
-                  'done': false,
-                });
+                context.read<RootCubit>().addTask(
+                      taskName: taskController.text,
+                      taskPriority: _selectedPriority,
+                    );
                 Navigator.of(context).pop();
                 taskController.clear();
               },
