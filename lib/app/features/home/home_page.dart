@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.grey.shade300,
           title: currentIndex == 0
               ? const Text(
-                  'To do',
+                  'TO DO',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )
               : null,
