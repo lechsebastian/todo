@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/app/features/home/tasks/cubit/tasks_cubit.dart';
+import 'package:todo/app/repositories/tasks_repository.dart';
 
 class TasksPageContent extends StatelessWidget {
   const TasksPageContent({
@@ -10,7 +11,7 @@ class TasksPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TasksCubit()..start(),
+      create: (context) => TasksCubit(TasksRepository())..start(),
       child: BlocBuilder<TasksCubit, TasksState>(
         builder: (context, state) {
           if (state.errorMessage.isNotEmpty) {
@@ -32,13 +33,13 @@ class TasksPageContent extends StatelessWidget {
             );
           }
 
-          final documents = state.documents;
+          final tasks = state.tasks;
 
           return Padding(
             padding: const EdgeInsets.all(20),
             child: ListView(
               children: [
-                for (final document in documents) ...[
+                for (final task in tasks) ...[
                   Container(
                     padding: const EdgeInsets.only(
                         left: 16, right: 24, top: 8, bottom: 8),
@@ -52,20 +53,20 @@ class TasksPageContent extends StatelessWidget {
                         Row(
                           children: [
                             Checkbox(
-                              value: document['done'],
+                              value: task.done,
                               activeColor: Colors.black,
                               onChanged: (value) {
                                 context
                                     .read<TasksCubit>()
-                                    .taskDone(documentID: document.id);
+                                    .taskDone(taskID: task.id);
                               },
                             ),
                             Text(
-                              document['name'],
+                              task.name,
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                decoration: document['done']
+                                decoration: task.done
                                     ? TextDecoration.lineThrough
                                     : null,
                               ),
@@ -73,14 +74,11 @@ class TasksPageContent extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          document['priority'] == 1 || document['priority'] == 2
-                              ? "!"
-                              : '',
+                          task.priority == 1 || task.priority == 2 ? "!" : '',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color:
-                                document['priority'] == 1 ? Colors.red : null,
+                            color: task.priority == 1 ? Colors.red : null,
                           ),
                         ),
                       ],
