@@ -86,6 +86,43 @@ class TasksPageContent extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                 ],
+                const Padding(
+                  padding: EdgeInsets.only(top: 24),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          color: Colors.grey,
+                          thickness: 1,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        child: Text(
+                          'done',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          color: Colors.grey,
+                          thickness: 1,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Clear',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ),
               ],
             ),
           );
