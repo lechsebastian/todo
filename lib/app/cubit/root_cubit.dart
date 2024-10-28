@@ -87,11 +87,23 @@ class RootCubit extends Cubit<RootState> {
     required String taskName,
     required taskPriority,
   }) async {
-    FirebaseFirestore.instance.collection('tasks').add({
-      'name': taskName,
-      'priority': taskPriority,
-      'done': false,
-    });
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+
+    if (userID == null) {
+      throw Exception('User is not signed in');
+    }
+
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('tasks')
+        .add(
+      {
+        'name': taskName,
+        'priority': taskPriority,
+        'done': false,
+      },
+    );
   }
 
   @override
