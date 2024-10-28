@@ -2,13 +2,13 @@ part of 'tasks_cubit.dart';
 
 @immutable
 class TasksState {
-  final List<QueryDocumentSnapshot<Map<String, dynamic>>> documents;
+  const TasksState({
+    this.tasks = const [],
+    this.isLoading = false,
+    this.errorMessage = '',
+  });
+
+  final List<TaskModel> tasks;
   final bool isLoading;
   final String errorMessage;
-
-  const TasksState({
-    required this.documents,
-    required this.isLoading,
-    required this.errorMessage,
-  });
 }
