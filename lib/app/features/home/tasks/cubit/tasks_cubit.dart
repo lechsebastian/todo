@@ -41,9 +41,17 @@ class TasksCubit extends Cubit<TasksState> {
       );
   }
 
-  Future<void> taskDone({required String taskID}) async {
+  Future<void> switchCheckbox({required String taskID}) async {
     try {
-      await _tasksRepository.deleteTask(taskID: taskID);
+      await _tasksRepository.switchCheckbox(taskID: taskID);
+    } catch (error) {
+      emit(TasksState(errorMessage: error.toString()));
+    }
+  }
+
+  Future<void> clearDoneTasks() async {
+    try {
+      await _tasksRepository.deleteTasks();
     } catch (error) {
       emit(TasksState(errorMessage: error.toString()));
     }

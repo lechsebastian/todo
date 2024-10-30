@@ -34,18 +34,108 @@ class TasksPageContent extends StatelessWidget {
           }
 
           final tasks = state.tasks;
+          final doneTasks = tasks.where((task) => task.done).toList();
 
           return Padding(
             padding: const EdgeInsets.all(20),
             child: ListView(
               children: [
                 for (final task in tasks) ...[
+                  if (!task.done)
+                    Container(
+                      padding: const EdgeInsets.only(
+                          left: 16, right: 24, top: 8, bottom: 8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.white,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: task.done,
+                                activeColor: Colors.black,
+                                onChanged: (value) {
+                                  context
+                                      .read<TasksCubit>()
+                                      .switchCheckbox(taskID: task.id);
+                                },
+                              ),
+                              Text(
+                                task.name,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  decoration: task.done
+                                      ? TextDecoration.lineThrough
+                                      : null,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            task.priority == 1 || task.priority == 2 ? "!" : '',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: task.priority == 1 ? Colors.red : null,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  const SizedBox(height: 12),
+                ],
+                if (doneTasks.isNotEmpty) ...[
+                  const Padding(
+                    padding: EdgeInsets.only(top: 24),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Divider(
+                            color: Colors.grey,
+                            thickness: 1,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12),
+                          child: Text(
+                            'done',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                        Expanded(
+                          child: Divider(
+                            color: Colors.grey,
+                            thickness: 1,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {
+                        context.read<TasksCubit>().clearDoneTasks();
+                      },
+                      child: const Text(
+                        'Clear',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ],
+                for (final task in doneTasks) ...[
                   Container(
                     padding: const EdgeInsets.only(
                         left: 16, right: 24, top: 8, bottom: 8),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: Colors.white,
+                      color: Colors.grey.shade200,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,18 +144,19 @@ class TasksPageContent extends StatelessWidget {
                           children: [
                             Checkbox(
                               value: task.done,
-                              activeColor: Colors.black,
+                              activeColor: Colors.black26,
                               onChanged: (value) {
                                 context
                                     .read<TasksCubit>()
-                                    .taskDone(taskID: task.id);
+                                    .switchCheckbox(taskID: task.id);
                               },
                             ),
                             Text(
                               task.name,
                               style: TextStyle(
                                 fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black26,
                                 decoration: task.done
                                     ? TextDecoration.lineThrough
                                     : null,
@@ -78,7 +169,9 @@ class TasksPageContent extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: task.priority == 1 ? Colors.red : null,
+                            color: task.priority == 1
+                                ? Colors.red.shade200
+                                : Colors.black26,
                           ),
                         ),
                       ],
@@ -86,43 +179,6 @@ class TasksPageContent extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                 ],
-                const Padding(
-                  padding: EdgeInsets.only(top: 24),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Divider(
-                          color: Colors.grey,
-                          thickness: 1,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
-                        child: Text(
-                          'done',
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ),
-                      Expanded(
-                        child: Divider(
-                          color: Colors.grey,
-                          thickness: 1,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Clear',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                ),
               ],
             ),
           );

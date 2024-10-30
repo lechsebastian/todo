@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:todo/app/cubit/root_cubit.dart';
 import 'package:todo/app/features/widgets/my_textfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/app/repositories/tasks_repository.dart';
 
 class MyAddTaskDialog extends StatefulWidget {
   const MyAddTaskDialog({super.key});
@@ -26,6 +25,17 @@ class _MyAddTaskDialogState extends State<MyAddTaskDialog> {
           children: [
             TextButton(
               onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                'Close',
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
                 context.read<RootCubit>().addTask(
                       taskName: taskController.text,
                       taskPriority: _selectedPriority,
@@ -37,17 +47,6 @@ class _MyAddTaskDialogState extends State<MyAddTaskDialog> {
                 'Add',
                 style: TextStyle(
                   color: Colors.black,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text(
-                'Close',
-                style: TextStyle(
-                  color: Colors.red,
                 ),
               ),
             ),

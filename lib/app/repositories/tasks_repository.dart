@@ -31,24 +31,45 @@ class TasksRepository {
     );
   }
 
-  Future<void> deleteTask({required String taskID}) async {
+  Future<void> switchCheckbox({required String taskID}) async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
 
     if (userID == null) {
       throw Exception('User is not signed in');
     }
 
-    await FirebaseFirestore.instance
+    final taskDoc = FirebaseFirestore.instance
         .collection('users')
         .doc(userID)
         .collection('tasks')
-        .doc(taskID)
-        .update({'done': true});
-    await FirebaseFirestore.instance
+        .doc(taskID);
+
+    final snapshot = await taskDoc.get();
+    if (snapshot.exists) {
+      final currentDone = snapshot.data()?['done'] as bool? ?? false;
+
+      await taskDoc.update({'done': !currentDone});
+    } else {
+      throw Exception('Task does not exist');
+    }
+  }
+
+  Future<void> deleteTasks() async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+
+    if (userID == null) {
+      throw Exception('User is not signed in');
+    }
+
+    final querySnapshot = await FirebaseFirestore.instance
         .collection('users')
         .doc(userID)
         .collection('tasks')
-        .doc(taskID)
-        .delete();
+        .where('done', isEqualTo: true)
+        .get();
+
+    for (var doc in querySnapshot.docs) {
+      await doc.reference.delete();
+    }
   }
 }
