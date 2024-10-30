@@ -68,8 +68,12 @@ class TasksRepository {
         .where('done', isEqualTo: true)
         .get();
 
+    final batch = FirebaseFirestore.instance.batch();
+
     for (var doc in querySnapshot.docs) {
-      await doc.reference.delete();
+      batch.delete(doc.reference);
     }
+
+    await batch.commit();
   }
 }
