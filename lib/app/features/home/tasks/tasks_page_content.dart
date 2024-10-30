@@ -70,7 +70,7 @@ class TasksPageContent extends StatelessWidget {
                                     child: Text(
                                       task.name,
                                       style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                         decoration: task.done
                                             ? TextDecoration.lineThrough
@@ -168,7 +168,7 @@ class TasksPageContent extends StatelessWidget {
                                   child: Text(
                                     task.name,
                                     style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black26,
                                       decoration: task.done
