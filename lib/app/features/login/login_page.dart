@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                     ? 'Hey, nice to see you here!'
                     : 'Hey, we missed you!',
               ),
-              const SizedBox(height: 100),
+              const SizedBox(height: 90),
               MyTextField(
                 controller: widget.emailController,
                 label: 'Email',

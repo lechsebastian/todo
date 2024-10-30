@@ -25,6 +25,17 @@ class _MyAddTaskDialogState extends State<MyAddTaskDialog> {
           children: [
             TextButton(
               onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                'Close',
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
                 context.read<RootCubit>().addTask(
                       taskName: taskController.text,
                       taskPriority: _selectedPriority,
@@ -36,17 +47,6 @@ class _MyAddTaskDialogState extends State<MyAddTaskDialog> {
                 'Add',
                 style: TextStyle(
                   color: Colors.black,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text(
-                'Close',
-                style: TextStyle(
-                  color: Colors.red,
                 ),
               ),
             ),
