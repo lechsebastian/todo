@@ -42,51 +42,61 @@ class TasksPageContent extends StatelessWidget {
               children: [
                 for (final task in tasks) ...[
                   if (!task.done)
-                    Container(
-                      padding: const EdgeInsets.only(
-                          left: 16, right: 24, top: 8, bottom: 8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.white,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Checkbox(
-                                value: task.done,
-                                activeColor: Colors.black,
-                                onChanged: (value) {
-                                  context
-                                      .read<TasksCubit>()
-                                      .switchCheckbox(taskID: task.id);
-                                },
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: Container(
+                        padding: const EdgeInsets.only(
+                            left: 16, right: 24, top: 8, bottom: 8),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.white,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              child: Row(
+                                children: [
+                                  Checkbox(
+                                    value: task.done,
+                                    activeColor: Colors.black,
+                                    onChanged: (value) {
+                                      context
+                                          .read<TasksCubit>()
+                                          .switchCheckbox(taskID: task.id);
+                                    },
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      task.name,
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                        decoration: task.done
+                                            ? TextDecoration.lineThrough
+                                            : null,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                task.name,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  decoration: task.done
-                                      ? TextDecoration.lineThrough
-                                      : null,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            task.priority == 1 || task.priority == 2 ? "!" : '',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: task.priority == 1 ? Colors.red : null,
                             ),
-                          ),
-                        ],
+                            Text(
+                              task.priority == 1 || task.priority == 2
+                                  ? " !"
+                                  : ' ',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: task.priority == 1 ? Colors.red : null,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  const SizedBox(height: 12),
                 ],
                 if (doneTasks.isNotEmpty) ...[
                   const Padding(
@@ -130,54 +140,64 @@ class TasksPageContent extends StatelessWidget {
                   ),
                 ],
                 for (final task in doneTasks) ...[
-                  Container(
-                    padding: const EdgeInsets.only(
-                        left: 16, right: 24, top: 8, bottom: 8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.grey.shade200,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: task.done,
-                              activeColor: Colors.black26,
-                              onChanged: (value) {
-                                context
-                                    .read<TasksCubit>()
-                                    .switchCheckbox(taskID: task.id);
-                              },
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: Container(
+                      padding: const EdgeInsets.only(
+                          left: 16, right: 24, top: 8, bottom: 8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.grey.shade200,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Row(
+                              children: [
+                                Checkbox(
+                                  value: task.done,
+                                  activeColor: Colors.black26,
+                                  onChanged: (value) {
+                                    context
+                                        .read<TasksCubit>()
+                                        .switchCheckbox(taskID: task.id);
+                                  },
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    task.name,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black26,
+                                      decoration: task.done
+                                          ? TextDecoration.lineThrough
+                                          : null,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              task.name,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black26,
-                                decoration: task.done
-                                    ? TextDecoration.lineThrough
-                                    : null,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          task.priority == 1 || task.priority == 2 ? "!" : '',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: task.priority == 1
-                                ? Colors.red.shade200
-                                : Colors.black26,
                           ),
-                        ),
-                      ],
+                          Text(
+                            task.priority == 1 || task.priority == 2
+                                ? " !"
+                                : ' ',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: task.priority == 1
+                                  ? Colors.red.shade200
+                                  : Colors.black26,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 12),
                 ],
               ],
             ),
