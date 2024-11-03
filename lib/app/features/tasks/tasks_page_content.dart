@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/app/features/home/tasks/cubit/tasks_cubit.dart';
+import 'package:todo/app/features/tasks/cubit/tasks_cubit.dart';
 import 'package:todo/app/repositories/tasks_repository.dart';
 
 class TasksPageContent extends StatelessWidget {
@@ -46,7 +46,7 @@ class TasksPageContent extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 12),
                       child: Container(
                         padding: const EdgeInsets.only(
-                            left: 16, right: 24, top: 8, bottom: 8),
+                            left: 16, right: 24, top: 2, bottom: 2),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           color: Colors.white,
@@ -70,7 +70,7 @@ class TasksPageContent extends StatelessWidget {
                                     child: Text(
                                       task.name,
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 13,
                                         fontWeight: FontWeight.w500,
                                         decoration: task.done
                                             ? TextDecoration.lineThrough
@@ -144,7 +144,7 @@ class TasksPageContent extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 12),
                     child: Container(
                       padding: const EdgeInsets.only(
-                          left: 16, right: 24, top: 8, bottom: 8),
+                          left: 16, right: 24, top: 2, bottom: 2),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Colors.grey.shade200,
@@ -168,7 +168,7 @@ class TasksPageContent extends StatelessWidget {
                                   child: Text(
                                     task.name,
                                     style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black26,
                                       decoration: task.done
