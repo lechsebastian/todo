@@ -57,6 +57,19 @@ class TasksCubit extends Cubit<TasksState> {
     }
   }
 
+  Future<void> addTask({
+    required String taskName,
+    required taskPriority,
+  }) async {
+    try {
+      await _tasksRepository.addTask(
+        taskName: taskName,
+        taskPriority: taskPriority,);
+    } catch (error) {
+      emit(TasksState(errorMessage: error.toString()));
+    }
+  }
+
   @override
   Future<void> close() {
     _streamSubscription?.cancel();

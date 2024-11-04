@@ -1,7 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:todo/app/cubit/root_cubit.dart';
+import 'package:todo/app/features/tasks/cubit/tasks_cubit.dart';
 import 'package:todo/app/features/widgets/my_textfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,13 +30,13 @@ class _MyAddTaskDialogState extends State<MyAddTaskDialog> {
               child: const Text(
                 'Close',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: Colors.red,
                 ),
               ),
             ),
             TextButton(
               onPressed: () {
-                context.read<RootCubit>().addTask(
+                context.read<TasksCubit>().addTask(
                       taskName: taskController.text,
                       taskPriority: _selectedPriority,
                     );

@@ -54,6 +54,29 @@ class TasksRepository {
     }
   }
 
+  Future<void> addTask({
+    required String taskName,
+    required taskPriority,
+  }) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+
+    if (userID == null) {
+      throw Exception('User is not signed in');
+    }
+
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('tasks')
+        .add(
+      {
+        'name': taskName,
+        'priority': taskPriority,
+        'done': false,
+      },
+    );
+  }
+
   Future<void> deleteTasks() async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
 
