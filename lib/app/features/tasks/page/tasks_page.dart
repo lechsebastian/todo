@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/app/features/tasks/cubit/tasks_cubit.dart';
 import 'package:todo/app/features/widgets/my_add_task_dialog.dart';
+import 'package:todo/app/features/widgets/my_clear_button.dart';
+import 'package:todo/app/features/widgets/my_done_dividers.dart';
 import 'package:todo/app/features/widgets/my_drawer.dart';
+import 'package:todo/app/features/widgets/my_task_view.dart';
 import 'package:todo/app/repositories/tasks_repository.dart';
 
 class TasksPage extends StatelessWidget {
@@ -74,163 +77,14 @@ class TasksPage extends StatelessWidget {
               child: ListView(
                 children: [
                   for (final task in tasks) ...[
-                    if (!task.done)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 12),
-                        child: Container(
-                          padding: const EdgeInsets.only(
-                              left: 16, right: 24, top: 2, bottom: 2),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.white,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(
-                                child: Row(
-                                  children: [
-                                    Checkbox(
-                                      value: task.done,
-                                      activeColor: Colors.black,
-                                      onChanged: (value) {
-                                        context
-                                            .read<TasksCubit>()
-                                            .switchCheckbox(taskID: task.id);
-                                      },
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        task.name,
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500,
-                                          decoration: task.done
-                                              ? TextDecoration.lineThrough
-                                              : null,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Text(
-                                task.priority == 1 || task.priority == 2
-                                    ? " !"
-                                    : ' ',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: task.priority == 1 ? Colors.red : null,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                    if (!task.done) MyTaskView(task: task),
                   ],
                   if (doneTasks.isNotEmpty) ...[
-                    const Padding(
-                      padding: EdgeInsets.only(top: 24),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Divider(
-                              color: Colors.grey,
-                              thickness: 1,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(
-                              'done',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                          ),
-                          Expanded(
-                            child: Divider(
-                              color: Colors.grey,
-                              thickness: 1,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {
-                          context.read<TasksCubit>().clearDoneTasks();
-                        },
-                        child: const Text(
-                          'Clear',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                    ),
+                    const MyDoneDividers(),
+                    const MyClearButton(),
                   ],
                   for (final task in doneTasks) ...[
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: Container(
-                        padding: const EdgeInsets.only(
-                            left: 16, right: 24, top: 2, bottom: 2),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.grey.shade200,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              child: Row(
-                                children: [
-                                  Checkbox(
-                                    value: task.done,
-                                    activeColor: Colors.black26,
-                                    onChanged: (value) {
-                                      context
-                                          .read<TasksCubit>()
-                                          .switchCheckbox(taskID: task.id);
-                                    },
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      task.name,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black26,
-                                        decoration: task.done
-                                            ? TextDecoration.lineThrough
-                                            : null,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Text(
-                              task.priority == 1 || task.priority == 2
-                                  ? " !"
-                                  : ' ',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: task.priority == 1
-                                    ? Colors.red.shade200
-                                    : Colors.black26,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    MyTaskView(task: task),
                   ],
                 ],
               ),
