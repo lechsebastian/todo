@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo/app/cubit/root_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/app/features/settings/cubit/settings_cubit.dart';
+import 'package:todo/app/features/widgets/my_app_bar.dart';
 import 'package:todo/app/features/widgets/my_drawer.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -10,36 +11,62 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Settings',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            letterSpacing: 2,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.grey.shade300,
-      ),
-      drawer: const MyDrawer(),
-      backgroundColor: Colors.grey.shade300,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Sign out'),
-            const SizedBox(height: 20),
-            IconButton(
-              onPressed: () {
-                context.read<RootCubit>().signOut();
-              },
-              icon: const Icon(Icons.logout),
-              color: Colors.black,
-              iconSize: 30,
+    return BlocProvider(
+      create: (context) => SettingsCubit(),
+      child: BlocBuilder<SettingsCubit, SettingsState>(
+        builder: (context, state) {
+          if (state.errorMessage.isNotEmpty) {
+            return Center(
+              child: Text('Something went wrong. Error: ${state.errorMessage}'),
+            );
+          }
+
+          if (state.isLoading) {
+            return const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 5),
+                  Text('Loading..'),
+                ],
+              ),
+            );
+          }
+          return Scaffold(
+            appBar: const MyAppBar(title: 'Settings'),
+            drawer: const MyDrawer(),
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            body: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Sign out:',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          context.read<SettingsCubit>().signOut();
+                        },
+                        icon: const Icon(Icons.logout),
+                        color: Theme.of(context).colorScheme.onSurface,
+                        iconSize: 30,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

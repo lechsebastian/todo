@@ -1,8 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:todo/app/cubit/root_cubit.dart';
 import 'package:todo/app/features/tasks/page/tasks_page.dart';
 import 'package:todo/app/features/login/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/theme/theme_provider.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -11,9 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
+      theme: Provider.of<ThemeProvider>(context).themeData,
       home: const RootPage(),
     );
   }
@@ -53,7 +53,6 @@ class RootPage extends StatelessWidget {
           if (user == null) {
             return LoginPage();
           }
-          // return HomePage(user: user);
           return const TasksPage();
         },
       ),

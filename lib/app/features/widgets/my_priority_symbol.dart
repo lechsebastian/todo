@@ -20,7 +20,7 @@ class MyPrioritySymbol extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: task.priority == 1
                     ? Colors.red.shade200
-                    : Colors.grey.shade400,
+                    : Theme.of(context).colorScheme.onSecondary,
               ),
             )
           : const SizedBox(width: 10, height: 10);
@@ -32,7 +32,9 @@ class MyPrioritySymbol extends StatelessWidget {
             height: 10,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: task.priority == 1 ? Colors.red : Colors.black,
+              color: task.priority == 1
+                  ? Colors.red
+                  : Theme.of(context).colorScheme.onSurface,
             ),
           )
         : const SizedBox(width: 10, height: 10);

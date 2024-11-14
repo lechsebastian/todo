@@ -15,9 +15,11 @@ class MyClearButton extends StatelessWidget {
         onPressed: () {
           context.read<TasksCubit>().clearDoneTasks();
         },
-        child: const Text(
+        child: Text(
           'Clear',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
         ),
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/app/features/tasks/cubit/tasks_cubit.dart';
 import 'package:todo/app/features/widgets/my_add_task_dialog.dart';
+import 'package:todo/app/features/widgets/my_app_bar.dart';
 import 'package:todo/app/features/widgets/my_clear_button.dart';
 import 'package:todo/app/features/widgets/my_done_dividers.dart';
 import 'package:todo/app/features/widgets/my_drawer.dart';
@@ -42,17 +43,7 @@ class TasksPage extends StatelessWidget {
           final doneTasks = tasks.where((task) => task.done).toList();
 
           return Scaffold(
-            appBar: AppBar(
-              title: const Text(
-                'To do',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2,
-                ),
-              ),
-              centerTitle: true,
-              backgroundColor: Colors.grey.shade300,
-            ),
+            appBar: const MyAppBar(title: 'To do'),
             drawer: const MyDrawer(),
             floatingActionButton: FloatingActionButton(
               backgroundColor: Colors.black,
@@ -71,7 +62,7 @@ class TasksPage extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            backgroundColor: Colors.grey.shade300,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             body: Padding(
               padding: const EdgeInsets.all(20),
               child: ListView(

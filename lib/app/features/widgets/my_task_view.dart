@@ -20,7 +20,9 @@ class MyTaskView extends StatelessWidget {
         padding: const EdgeInsets.only(left: 16, right: 24, top: 2, bottom: 2),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: task.done ? Colors.grey.shade200 : Colors.white,
+          color: task.done
+              ? Theme.of(context).colorScheme.secondary
+              : Theme.of(context).colorScheme.primary,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,10 +44,10 @@ class MyTaskView extends StatelessWidget {
                       task.name,
                       style: TextStyle(
                         fontSize: 13,
-                        color: task.done ? Colors.black26 : Colors.black,
+                        color: task.done
+                            ? Theme.of(context).colorScheme.onSecondary
+                            : Theme.of(context).colorScheme.onSurface,
                         fontWeight: FontWeight.w500,
-                        decoration:
-                            task.done ? TextDecoration.lineThrough : null,
                       ),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,

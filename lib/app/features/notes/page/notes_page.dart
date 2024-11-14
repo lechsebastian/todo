@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/app/features/widgets/my_app_bar.dart';
 import 'package:todo/app/features/widgets/my_drawer.dart';
 
 class NotesPage extends StatelessWidget {
@@ -7,19 +8,9 @@ class NotesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Notes',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            letterSpacing: 2,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.grey.shade300,
-      ),
+      appBar: const MyAppBar(title: 'Notes'),
       drawer: const MyDrawer(),
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: const Center(
         child: Text('Notes Page'),
       ),

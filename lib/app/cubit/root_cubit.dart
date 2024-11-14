@@ -79,10 +79,6 @@ class RootCubit extends Cubit<RootState> {
     }
   }
 
-  Future<void> signOut() async {
-    FirebaseAuth.instance.signOut();
-  }
-
   Future<void> addTask({
     required String taskName,
     required taskPriority,
