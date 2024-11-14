@@ -44,45 +44,47 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.assignment, size: 180),
-              const SizedBox(height: 20),
-              MyCommunication(
-                text: isCreatingAccount
-                    ? 'Hey, nice to see you here!'
-                    : 'Hey, we missed you!',
-              ),
-              const SizedBox(height: 90),
-              MyTextField(
-                controller: widget.emailController,
-                label: 'Email',
-                isObscure: false,
-              ),
-              const SizedBox(height: 20),
-              MyTextField(
-                controller: widget.passwordController,
-                label: 'Password',
-                isObscure: true,
-              ),
-              const SizedBox(height: 40),
-              MyButton(
-                text: isCreatingAccount ? 'Register' : 'Login',
-                onTap: isCreatingAccount ? register : login,
-              ),
-              const SizedBox(height: 10),
-              MyTextAndButton(
-                onTap: switchLogingMode,
-                text: isCreatingAccount
-                    ? 'Already have an account? '
-                    : 'Not a member? ',
-                textToTap: isCreatingAccount ? 'Log in' : 'Register now',
-              ),
-            ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.assignment, size: 180),
+                const SizedBox(height: 20),
+                MyCommunication(
+                  text: isCreatingAccount
+                      ? 'Hey, nice to see you here!'
+                      : 'Hey, we missed you!',
+                ),
+                const SizedBox(height: 90),
+                MyTextField(
+                  controller: widget.emailController,
+                  label: 'Email',
+                  isObscure: false,
+                ),
+                const SizedBox(height: 20),
+                MyTextField(
+                  controller: widget.passwordController,
+                  label: 'Password',
+                  isObscure: true,
+                ),
+                const SizedBox(height: 40),
+                MyButton(
+                  text: isCreatingAccount ? 'Register' : 'Login',
+                  onTap: isCreatingAccount ? register : login,
+                ),
+                const SizedBox(height: 10),
+                MyTextAndButton(
+                  onTap: switchLogingMode,
+                  text: isCreatingAccount
+                      ? 'Already have an account? '
+                      : 'Not a member? ',
+                  textToTap: isCreatingAccount ? 'Log in' : 'Register now',
+                ),
+              ],
+            ),
           ),
         ),
       ),
