@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +10,16 @@ class SettingsCubit extends Cubit<SettingsState> {
       : super(const SettingsState(
           errorMessage: '',
           isLoading: false,
+          isSignedOut: false,
         ));
 
   Future<void> signOut() async {
-    FirebaseAuth.instance.signOut();
+    try {
+      // Przyklad wylogowania z Firebase Auth
+      await FirebaseAuth.instance.signOut();
+      emit(const SettingsState(isSignedOut: true));
+    } catch (error) {
+      emit(SettingsState(errorMessage: error.toString()));
+    }
   }
 }

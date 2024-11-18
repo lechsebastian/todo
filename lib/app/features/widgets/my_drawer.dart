@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:todo/app/features/notes/page/notes_page.dart';
-import 'package:todo/app/features/settings/cubit/settings_cubit.dart';
 import 'package:todo/app/features/settings/page/settings_page.dart';
 import 'package:todo/app/features/tasks/page/tasks_page.dart';
-import 'package:todo/theme/theme_provider.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({
@@ -38,7 +34,8 @@ class MyDrawer extends StatelessWidget {
                   ),
                   leading: const Icon(Icons.assignment_turned_in),
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.pop(context);
+                    Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const TasksPage()));
                   },
                 ),
@@ -53,7 +50,8 @@ class MyDrawer extends StatelessWidget {
                   ),
                   leading: const Icon(Icons.sticky_note_2),
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.pop(context);
+                    Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const NotesPage()));
                   },
                 ),
@@ -68,7 +66,8 @@ class MyDrawer extends StatelessWidget {
                   ),
                   leading: const Icon(Icons.settings),
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.pop(context);
+                    Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const SettingsPage()));
                   },
                 ),

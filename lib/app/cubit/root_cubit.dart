@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
@@ -77,29 +76,6 @@ class RootCubit extends Cubit<RootState> {
     } catch (error) {
       print('Error has been occured: $error');
     }
-  }
-
-  Future<void> addTask({
-    required String taskName,
-    required taskPriority,
-  }) async {
-    final userID = FirebaseAuth.instance.currentUser?.uid;
-
-    if (userID == null) {
-      throw Exception('User is not signed in');
-    }
-
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(userID)
-        .collection('tasks')
-        .add(
-      {
-        'name': taskName,
-        'priority': taskPriority,
-        'done': false,
-      },
-    );
   }
 
   @override
