@@ -46,7 +46,6 @@ class TasksPage extends StatelessWidget {
             appBar: const MyAppBar(title: 'To do'),
             drawer: const MyDrawer(),
             floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.black,
               onPressed: () {
                 showDialog(
                   barrierDismissible: false,
@@ -57,9 +56,9 @@ class TasksPage extends StatelessWidget {
                   ),
                 );
               },
-              child: const Icon(
+              child: Icon(
                 Icons.add,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             backgroundColor: Theme.of(context).colorScheme.surface,

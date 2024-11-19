@@ -11,6 +11,13 @@ class NotesPage extends StatelessWidget {
       appBar: const MyAppBar(title: 'Notes'),
       drawer: const MyDrawer(),
       backgroundColor: Theme.of(context).colorScheme.surface,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.add,
+          color: Theme.of(context).colorScheme.onSurface,
+        ),
+      ),
       body: const Center(
         child: Text('Notes Page'),
       ),
