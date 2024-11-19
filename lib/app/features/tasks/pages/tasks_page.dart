@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/app/features/tasks/cubit/tasks_cubit.dart';
-import 'package:todo/app/features/widgets/my_add_task_dialog.dart';
-import 'package:todo/app/features/widgets/my_app_bar.dart';
-import 'package:todo/app/features/widgets/my_clear_button.dart';
-import 'package:todo/app/features/widgets/my_done_dividers.dart';
-import 'package:todo/app/features/widgets/my_drawer.dart';
-import 'package:todo/app/features/widgets/my_task_view.dart';
+import 'package:todo/app/features/tasks/widgets/my_add_task_dialog.dart';
+import 'package:todo/app/features/common/widgets/my_app_bar.dart';
+import 'package:todo/app/features/tasks/widgets/my_clear_button.dart';
+import 'package:todo/app/features/tasks/widgets/my_done_dividers.dart';
+import 'package:todo/app/features/tasks/widgets/my_drawer.dart';
+import 'package:todo/app/features/tasks/widgets/my_task_view.dart';
 import 'package:todo/app/repositories/tasks_repository.dart';
 
 class TasksPage extends StatelessWidget {

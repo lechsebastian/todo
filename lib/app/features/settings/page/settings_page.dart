@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/app/cubit/root_cubit.dart';
-import 'package:todo/app/features/widgets/my_app_bar.dart';
+import 'package:todo/app/features/common/widgets/my_app_bar.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({

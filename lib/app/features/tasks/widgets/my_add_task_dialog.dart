@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:todo/app/features/tasks/cubit/tasks_cubit.dart';
-import 'package:todo/app/features/widgets/my_textfield.dart';
+import 'package:todo/app/features/tasks/widgets/my_textfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyAddTaskDialog extends StatefulWidget {

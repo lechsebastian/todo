@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/app/cubit/root_cubit.dart';
-import 'package:todo/app/features/tasks/page/tasks_page.dart';
-import 'package:todo/app/features/login/login_page.dart';
+import 'package:todo/app/features/tasks/pages/tasks_page.dart';
+import 'package:todo/app/features/login/page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/theme/theme_provider.dart';
 

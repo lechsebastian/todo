@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/app/features/widgets/my_app_bar.dart';
+import 'package:todo/app/features/common/widgets/my_app_bar.dart';
 
 class NotesPage extends StatelessWidget {
   const NotesPage({super.key});

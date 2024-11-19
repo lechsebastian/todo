@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/app/features/tasks/cubit/tasks_cubit.dart';
-import 'package:todo/app/features/widgets/my_priority_symbol.dart';
+import 'package:todo/app/features/tasks/widgets/my_priority_symbol.dart';
 import 'package:todo/app/models/task_model.dart';
 
 class MyTaskView extends StatelessWidget {

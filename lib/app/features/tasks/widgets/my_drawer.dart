@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo/app/features/notes/page/notes_page.dart';
+import 'package:todo/app/features/notes/pages/notes_page.dart';
 import 'package:todo/app/features/settings/page/settings_page.dart';
-import 'package:todo/app/features/tasks/page/tasks_page.dart';
+import 'package:todo/app/features/tasks/pages/tasks_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({

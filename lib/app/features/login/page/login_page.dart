@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo/app/cubit/root_cubit.dart';
-import 'package:todo/app/features/widgets/my_button.dart';
-import 'package:todo/app/features/widgets/my_communication.dart';
-import 'package:todo/app/features/widgets/my_text_and_button.dart';
-import 'package:todo/app/features/widgets/my_textfield.dart';
+import 'package:todo/app/features/login/widgets/my_button.dart';
+import 'package:todo/app/features/tasks/widgets/my_communication.dart';
+import 'package:todo/app/features/tasks/widgets/my_text_and_button.dart';
+import 'package:todo/app/features/tasks/widgets/my_textfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
