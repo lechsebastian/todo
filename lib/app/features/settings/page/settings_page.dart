@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/app/cubit/root_cubit.dart';
 import 'package:todo/app/features/widgets/my_app_bar.dart';
-import 'package:todo/app/features/widgets/my_drawer.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({
@@ -17,7 +16,6 @@ class SettingsPage extends StatelessWidget {
           builder: (context, state) {
             return Scaffold(
               appBar: const MyAppBar(title: 'Settings'),
-              drawer: const MyDrawer(),
               backgroundColor: Theme.of(context).colorScheme.surface,
               body: Padding(
                 padding: const EdgeInsets.all(20),

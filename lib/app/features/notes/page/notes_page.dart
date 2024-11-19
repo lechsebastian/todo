@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todo/app/features/widgets/my_app_bar.dart';
-import 'package:todo/app/features/widgets/my_drawer.dart';
 
 class NotesPage extends StatelessWidget {
   const NotesPage({super.key});
@@ -9,7 +8,6 @@ class NotesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MyAppBar(title: 'Notes'),
-      drawer: const MyDrawer(),
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},

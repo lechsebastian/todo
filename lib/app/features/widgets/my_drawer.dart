@@ -35,8 +35,6 @@ class MyDrawer extends StatelessWidget {
                   leading: const Icon(Icons.assignment_turned_in),
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const TasksPage()));
                   },
                 ),
                 ListTile(
