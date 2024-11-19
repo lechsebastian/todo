@@ -29,6 +29,15 @@ class RootCubit extends Cubit<RootState> {
 
     _streamSubscription = FirebaseAuth.instance.authStateChanges().listen(
       (user) {
+        if (user == null) {
+          emit(
+            const RootState(
+              user: null,
+              errorMessage: '',
+              isLoading: false,
+            ),
+          );
+        }
         emit(
           RootState(
             user: user,
@@ -60,7 +69,13 @@ class RootCubit extends Cubit<RootState> {
         password: password,
       );
     } catch (error) {
-      print('Error has been occured: $error');
+      emit(
+        RootState(
+          user: null,
+          errorMessage: error.toString(),
+          isLoading: false,
+        ),
+      );
     }
   }
 
@@ -74,7 +89,23 @@ class RootCubit extends Cubit<RootState> {
         password: password,
       );
     } catch (error) {
-      print('Error has been occured: $error');
+      RootState(
+        user: null,
+        errorMessage: error.toString(),
+        isLoading: false,
+      );
+    }
+  }
+
+  Future<void> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+    } catch (error) {
+      RootState(
+        user: null,
+        errorMessage: error.toString(),
+        isLoading: false,
+      );
     }
   }
 

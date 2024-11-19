@@ -12,10 +12,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/',
-      routes: {
-        '/login': (context) => LoginPage(),
-      },
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeProvider>(context).themeData,
       home: const RootPage(),
@@ -32,7 +28,19 @@ class RootPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => RootCubit()..start(),
-      child: BlocBuilder<RootCubit, RootState>(
+      child: BlocConsumer<RootCubit, RootState>(
+        listenWhen: (previous, current) {
+          return previous.user != current.user;
+        },
+        listener: (context, state) {
+          if (state.user == null) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => const RootPage(),
+              ),
+            );
+          }
+        },
         builder: (context, state) {
           if (state.errorMessage.isNotEmpty) {
             return Center(
