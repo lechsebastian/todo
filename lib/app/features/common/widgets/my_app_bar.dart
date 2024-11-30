@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:todo/theme/theme_provider.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MyAppBar({
     required this.title,
+    this.actions,
     super.key,
   });
 
   final String title;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +21,8 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       centerTitle: true,
+      actions: actions,
       backgroundColor: Theme.of(context).colorScheme.surface,
-      actions: [
-        IconButton(
-          icon: Icon(
-            Provider.of<ThemeProvider>(context, listen: false).isDarkMode
-                ? Icons.light_mode
-                : Icons.dark_mode,
-          ),
-          onPressed: () {
-            Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
-          },
-        ),
-      ],
     );
   }
 
