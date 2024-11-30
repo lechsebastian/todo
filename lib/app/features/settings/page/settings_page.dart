@@ -18,7 +18,7 @@ class SettingsPage extends StatelessWidget {
               appBar: const MyAppBar(title: 'Settings'),
               backgroundColor: Theme.of(context).colorScheme.surface,
               body: Padding(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

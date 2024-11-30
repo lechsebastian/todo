@@ -63,7 +63,7 @@ class TasksPage extends StatelessWidget {
             ),
             backgroundColor: Theme.of(context).colorScheme.surface,
             body: Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(16),
               child: ListView(
                 children: [
                   for (final task in tasks) ...[

@@ -14,6 +14,7 @@ class NotesRepository {
         .collection('users')
         .doc(userID)
         .collection('notes')
+        .orderBy('date', descending: true)
         .snapshots()
         .map(
       (querySnapshot) {
@@ -23,6 +24,7 @@ class NotesRepository {
               id: doc.id,
               title: doc['title'],
               description: doc['description'],
+              date: (doc['date'] as Timestamp).toDate(),
             );
           },
         ).toList();
