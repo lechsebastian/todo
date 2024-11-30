@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/app/features/common/widgets/my_app_bar.dart';
 import 'package:todo/app/features/notes/cubit/notes_cubit.dart';
+import 'package:todo/app/features/notes/pages/add_note_page.dart';
 import 'package:todo/app/repositories/notes_repository.dart';
 
 class NotesPage extends StatelessWidget {
@@ -38,7 +39,15 @@ class NotesPage extends StatelessWidget {
               appBar: const MyAppBar(title: 'Notes'),
               backgroundColor: Theme.of(context).colorScheme.surface,
               floatingActionButton: FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const AddNotePage();
+                      },
+                    ),
+                  );
+                },
                 child: Icon(
                   Icons.add,
                   color: Theme.of(context).colorScheme.onSurface,
